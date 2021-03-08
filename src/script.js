@@ -64,33 +64,6 @@ function displayCelsiusTemperature(event) {
 
 //h3.innerHTML = `${day} ${hours}:${minutes}`;)
 
-//Display city
-function search(city) {
-    let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
-    let apiCityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiCityUrl).then(displayWeather);   
-}
-
-function handleSubmit(event) {
-    event.preventDefault();
-    let cityInputElement = document.querySelector("#city");
-    search(cityInputElement.value);
-}
-
-//Current position
-function showPosition(event){
-    event.preventDefault();
-    navigator.geolocation.getCurrentPosition(displayPosition);
-}
-
-function displayPosition(position){
-let latitude = position.coords.latitude;
-let longitude = position.coords.longitude;
-let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-axios.get(apiUrl).then(displayWeather);
-}
-
 //Display forecast
 function displayForecast(response) {
     let forecastElement = document.querySelector("#forecast");
@@ -112,6 +85,36 @@ function displayForecast(response) {
     }
 }
 
+
+//Display city
+function search(city) {
+    let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
+    let apiCityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiCityUrl).then(displayWeather); 
+    
+    apiCityUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiCityUrl).then(displayForecast);
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    let cityInputElement = document.querySelector("#city");
+    search(cityInputElement.value);
+}
+
+//Current position
+function showPosition(event){
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(displayPosition);
+}
+
+function displayPosition(position){
+let latitude = position.coords.latitude;
+let longitude = position.coords.longitude;
+let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+axios.get(apiUrl).then(displayWeather);
+}
 
 let celsiusTemperature = null;
 
