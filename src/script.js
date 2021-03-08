@@ -60,9 +60,6 @@ function displayCelsiusTemperature(event) {
     let temperatureElement = document.querySelector("#temperature");
     temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
-//(let h3 = document.querySelector("h3");
-
-//h3.innerHTML = `${day} ${hours}:${minutes}`;)
 
 //Display forecast
 function displayForecast(response) {
@@ -85,7 +82,6 @@ function displayForecast(response) {
     }
 }
 
-
 //Display city
 function search(city) {
     let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
@@ -102,7 +98,7 @@ function handleSubmit(event) {
     search(cityInputElement.value);
 }
 
-//Current position
+//Display current position
 function showPosition(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(displayPosition);
