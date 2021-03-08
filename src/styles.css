@@ -72,6 +72,13 @@ ul {
   text-align: center;
 }
 
+.weather-forecast img {
+  display: block;
+  margin: 0 auto;
+  height: 48px;
+  width: 48px;
+}
+
 .temperature {
   font-size: 25px;
 }
