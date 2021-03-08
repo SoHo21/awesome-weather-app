@@ -1,4 +1,4 @@
-//Day and Time
+//Display day and time
 function formatDate(timestamp) {
 let now = new Date(timestamp);
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -19,6 +19,7 @@ if (minutes < 10){
 return `${hours}:${minutes}`;
 }
 
+//Display weather
 function displayWeather(response) {
     let temperatureElement =document.querySelector("#temperature");
     let cityElement = document.querySelector("#location");
@@ -40,6 +41,7 @@ function displayWeather(response) {
     iconElement.setAttribute(`alt`,response.data.weather[0].description);
 }
 
+//Display celsius/fahrenheit link
 function displayFahrenheitTemperature(event) {
     event.preventDefault();
     celsiusLink.classList.remove("active");
@@ -62,8 +64,7 @@ function displayCelsiusTemperature(event) {
 
 //h3.innerHTML = `${day} ${hours}:${minutes}`;)
 
-//Display city and temperature
-
+//Display city
 function search(city) {
     let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
     let apiCityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -76,7 +77,7 @@ function handleSubmit(event) {
     search(cityInputElement.value);
 }
 
-//Bonus Point
+//Current position
 function showPosition(event){
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(displayPosition);
@@ -89,6 +90,28 @@ let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayWeather);
 }
+
+//Display forecast
+function displayForecast(response) {
+    let forecastElement = document.querySelector("#forecast");
+    forecastElement.innerHTML = null;
+    let forecast = null;
+
+    for (let index = 0; index < 6; index++) {
+        forecast = response.data.list[index];
+        forecastElement.innerHTML +=
+        `<div class="col-2">
+                        <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" />
+                        <h3>
+                            ${formatHours(forecast.dt * 1000)}
+                        </h3>
+                        <div class="weather-forecast-temperature">
+                            <strong>${Math.round(forecast.main.temp_max)}°</strong> ${Math.round(forecast.main.temp_min)}°
+                        </div>
+                    </div>`;
+    }
+}
+
 
 let celsiusTemperature = null;
 
