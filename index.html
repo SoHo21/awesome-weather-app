@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">  
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,16 +18,24 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <form id="enterCity">
+                <form id="enter-city" class="mb-3">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-4">
-                                <input type="search" placeholder="Enter a city" class="form-control" autofocus="on"
-                                    autocomplete="off" id=city />
+                                <input 
+                                type="search" 
+                                placeholder="Enter a city" 
+                                class="form-control" 
+                                autofocus="on"
+                                autocomplete="off" 
+                                id="city"
+                                />
                             </div>
                         </div>
+                        <div class="col-3">
                         <input type="submit" value="Search" class="search" />
                         <input type="submit" value="Current" class="search" id="currentButton" />
+                        </div>
 
                         <div class="col-6">
                             <ul>
@@ -39,11 +49,13 @@
                         </div>
                     </div>
                 </form>
+                <div>
                 <h1 id="location"></h1>
                 <ul>
                     <li>Last updated: <span id="now"></span></li>
                     <li id="description"></li>
                 </ul>
+                </div>
 
                 <h2>
                     <div class="row">
@@ -57,7 +69,6 @@
                     </div>
                     </div>
                 </h2>
-                <h3></h3>
                 <hr />
                 <div class="forecast">
                     <div class="row">

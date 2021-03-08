@@ -34,7 +34,7 @@ function displayWeather(response) {
     cityElement.innerHTML = response.data.name;
     descriptionElement.innerHTML = response.data.weather[0].description;
     humidityElement.innerHTML = response.data.main.humidity;
-    windSpeedElement.innerHTML = Math.round(response.data.main.wind.speed);
+    windSpeedElement.innerHTML = Math.round(response.data.wind.speed);
     nowElement.innerHTML = formatDate(response.data.dt * 1000);
 
 }
@@ -69,10 +69,10 @@ function search(city) {
     axios.get(apiCityUrl).then(displayWeather);   
 }
 
-function handleSubmit(event){
-event.preventDefault();
-let cityInputElement = document.querySelector("#enterCity");
-search(cityInputElement).value;
+function handleSubmit(event) {
+    event.preventDefault();
+    let cityInputElement = document.querySelector("#city");
+    search(cityInputElement.value);
 }
 
 //Bonus Point
@@ -97,8 +97,10 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
-let enterCity = document.querySelector("#enterCity");
+let enterCity = document.querySelector("#enter-city");
 enterCity.addEventListener("submit", handleSubmit);
 
 let currentButton = document.querySelector("#currentButton");
 currentButton.addEventListener("click", showPosition )
+
+search("Tokyo");
