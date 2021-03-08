@@ -26,7 +26,7 @@ function displayWeather(response) {
     let humidityElement = document.querySelector("#humidity");
     let windSpeedElement = document.querySelector("#wind");
     let nowElement = document.querySelector("#now");
-    //let iconElement = document.querySelector("#icon");
+    let iconElement = document.querySelector("#icon");
 
     celsiusTemperature = response.data.main.temp;
 
@@ -36,7 +36,8 @@ function displayWeather(response) {
     humidityElement.innerHTML = response.data.main.humidity;
     windSpeedElement.innerHTML = Math.round(response.data.wind.speed);
     nowElement.innerHTML = formatDate(response.data.dt * 1000);
-
+    iconElement.setAttribute(`src`, `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    iconElement.setAttribute(`alt`,response.data.weather[0].description);
 }
 
 function displayFahrenheitTemperature(event) {
