@@ -1,8 +1,13 @@
 //Day and Time
-let now = new Date();
-
+function formatDate(timestamp) {
+let now = new Date(timestamp);
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let day = days[now.getDay()];
+return `${day} ${formatHours(timestamp)}`;
+}
+
+function formatHours(timestamp) {
+let now = new Date(timestamp);
 let hours = now.getHours();
 if (hours < 10){
     hours = `0${hours}`;
@@ -11,11 +16,32 @@ let minutes = now.getMinutes();
 if (minutes < 10){
     minutes = `0${minutes}`;
 }
-console.log(now);
+return `${hours}:${minutes}`;
+}
 
-let h3 = document.querySelector("h3");
+function displayWeather(response) {
+    let temperatureElement =document.querySelector("#temperature");
+    let cityElement = document.querySelector("#location");
+    let descriptionElement = document.querySelector("#description");
+    let humidityElement = document.querySelector("#humidity");
+    let windSpeedElement = document.querySelector("#wind");
+    let nowElement = document.querySelector("#now");
+    //let iconElement = document.querySelector("#icon");
 
-h3.innerHTML = `${day} ${hours}:${minutes}`;
+    celsiusTemperature = response.data.main.temp;
+
+    temperatureElement.innerHTML = Math.round(celsiusTemperature);
+    cityElement.innerHTML = response.data.name;
+    descriptionElement.innerHTML = response.data.weather[0].description;
+    humidityElement.innerHTML = response.data.main.humidity;
+    windSpeedElement.innerHTML = Math.round(response.data.main.wind.speed);
+    nowElement.innerHTML = formatDate(response.data.dt * 1000);
+
+}
+
+//(let h3 = document.querySelector("h3");
+
+//h3.innerHTML = `${day} ${hours}:${minutes}`;)
 
 //Display city and temperature
 
@@ -25,14 +51,6 @@ let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
 let city = document.querySelector("#city").value;
 let apiCityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 axios.get(apiCityUrl).then(displayWeather);
-}
-
-function displayWeather(response){
-    console.log(response.data);
-    document.querySelector("#location").innerHTML = response.data.name;
-    document.querySelector("#temperature").innerHTML = Math.round(response.data.main.temp);
-    document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-    document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
 }
 
 let enterCity = document.querySelector("#enterCity");
