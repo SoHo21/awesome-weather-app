@@ -110,6 +110,9 @@ let longitude = position.coords.longitude;
 let apiKey = `34a66ef508b0cc45fe99cd407595565c`;
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayWeather);
+
+apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+axios.get(apiUrl).then(displayForecast);
 }
 
 let celsiusTemperature = null;
